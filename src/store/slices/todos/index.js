@@ -28,9 +28,14 @@ export const todos = createSlice({
       };
       state.list = [...state.list, newTodo];
     },
+    fetchTodoList: () => {},
+    setTodoList: (state, action) => {
+      state.list = action.payload;
+    },
   },
 });
 
-export const { toggleCompleted, addTodo } = todos.actions;
+export const { toggleCompleted, addTodo, fetchTodoList, setTodoList } =
+  todos.actions;
 
 export default todos.reducer;
