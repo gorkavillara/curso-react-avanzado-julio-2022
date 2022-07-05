@@ -1,38 +1,21 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-const Todo = ({ todoItem, toggleItem }) => (
-  <div className="p-4 border border-slate-300 rounded-xl shadow flex flex-col gap-4">
-    <span
-      className={`text-sm font-semibold ${
-        todoItem.completed ? "line-through" : ""
-      }`}
-    >
-      {todoItem.text}
-    </span>
-    {todoItem.completed ? (
-      <button
-        className="bg-slate-300 py-1 px-2 rounded-xl text-white text-sm"
-        onClick={() => toggleItem(todoItem.id)}
-      >
-        Reset
-      </button>
-    ) : (
-      <button
-        className="bg-blue-300 py-1 px-2 rounded-xl text-white text-sm"
-        onClick={() => toggleItem(todoItem.id)}
-      >
-        Done
-      </button>
-    )}
-  </div>
-);
+import { toggleCompleted } from "../store/slices/todos";
 
-const TodoList = ({ todoList, toggleItem }) => {
+import Todo from "./Todo";
+
+const TodoList = () => {
+  const dispatch = useDispatch();
+  
+  const { todos } = useSelector((state) => state);
+  const toggleItem = (id) => dispatch(toggleCompleted(id));
+
   return (
     <div>
       <h5>Lista de tareas</h5>
       <div className="flex gap-3 flex-wrap">
-        {todoList.map((item) => (
+        {todos.list.map((item) => (
           <Todo key={item.id} todoItem={item} toggleItem={toggleItem} />
         ))}
       </div>

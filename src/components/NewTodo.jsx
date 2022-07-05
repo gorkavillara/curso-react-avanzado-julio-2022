@@ -1,14 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTodo } from "../store/slices/todos";
 
-const NewTodo = ({ todoList, setTodoList }) => {
+const NewTodo = () => {
+  const dispatch = useDispatch();
   const [newTodo, setNewTodo] = useState("");
   const addNewTodo = () => {
-    if (newTodo === "") return;
-    const newTodoList = [
-      ...todoList,
-      { id: todoList.length + 1, text: newTodo, completed: false },
-    ];
-    setTodoList(newTodoList);
+    dispatch(addTodo(newTodo));
+    setNewTodo("");
   };
   return (
     <div className="flex gap-2">
