@@ -8,9 +8,9 @@ import StoreContextProvider from "./contexts/StoreContextProvider";
 function App() {
   return (
     <AppContextProvider>
-      <Header />
-      {/* <Main /> */}
       <StoreContextProvider>
+        <Header />
+        {/* <Main /> */}
         <Products />
       </StoreContextProvider>
       <Footer />

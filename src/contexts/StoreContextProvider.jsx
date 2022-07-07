@@ -3,35 +3,24 @@ import { productsReducer, ACTIONS } from "../reducers/products";
 
 export const StoreContext = createContext();
 
-// const initializer = () => {
-//   return axios
-//     .get("https://62c343ea876c4700f539c147.mockapi.io/api/products")
-//     .then(r => { return r.data })
-//     .catch((e) => console.error(e));
-// };
-
-// const arrowF = () => {
-//     return 4
-// }
-
-// const arrowF = () => 4
-
-const initializer = () => [];
+const initialState = {
+  storeProducts: [],
+  cart: {
+    products: [],
+  },
+};
 
 const StoreContextProvider = ({ children }) => {
   //   const [products, setProducts] = useState([]);
-  const [products, dispatch] = useReducer(
-    productsReducer,
-    [{ id: 0, title: "dummy" }],
-    initializer
-  );
+  const [store, dispatch] = useReducer(productsReducer, initialState);
   return (
     <StoreContext.Provider
       value={{
-        products,
+        products: store.storeProducts,
         setProducts: (payload) =>
           dispatch({ type: ACTIONS.SET_PRODUCTS, payload }),
         addToCart: (id) => dispatch({ type: ACTIONS.ADD_TO_CART, payload: id }),
+        cart: store.cart
       }}
     >
       {children}
