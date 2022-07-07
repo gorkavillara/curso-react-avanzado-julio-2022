@@ -16,3 +16,12 @@ const CounterContextProvider = ({ children }) => {
 };
 
 export default CounterContextProvider;
+
+// function reductor(state, action) {
+//     switch(action.type) {
+//         case "MULTIPLICA_POR_DOS":
+//             return state * 2
+//         default:
+//             return state
+//     }
+// }
